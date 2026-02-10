@@ -1,0 +1,113 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+root {
+  /* max-width: 1280px; */
+  margin: 0 auto;
+  /* padding: 1rem; */
+  text-align: center;
+}
+
+/* .logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+} */
+
+/* @keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+} */
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.main_movies_container {
+  display: grid;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0 22px;
+  grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+  grid-gap: 5px;
+  column-gap: 20px;
+  width: 100vw;
+}
+
+.mylist_movie_container {
+  /* display: flex; */
+  width: 40rem;
+  padding: 0 10px;
+  column-gap: 2rem;
+  margin: 5px auto;
+  border: solid black 2px;
+  border-radius: 3px;
+}
+
+.mylist_thumbnail_container {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.mylist_movie_details_container {
+  margin: 5px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.mylist_bts_container > button {
+  margin: 5px;
+}
+
+.mylist_comment_container {
+  margin: 5px 0;
+}
+
+h4,
+p {
+  margin: 5px 0;
+}
+
+.form_popup_container {
+  display: block;
+  position: fixed;
+  width: 500px;
+  height: 250px;
+  /* z-index: 100; */
+  border-radius: 5px;
+  backdrop-filter: blur(20px) brightness(110%);
+  background-color: rgb(235, 168, 168);
+}
+
+.form_popup_container::backdrop {
+  background-color: rgba(0, 0, 0, 0.726); /* A semi-transparent black overlay */
+  backdrop-filter: blur(5px); /* Optional blur effect */
+}
+
+#commentId {
+  width: 90%;
+  resize: none;
+}
