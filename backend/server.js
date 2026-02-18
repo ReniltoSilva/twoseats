@@ -3,6 +3,8 @@ const cors = require("cors");
 require("dotenv").config();
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const Movie = require("./models/movie");
+const User = require("./models/user");
 
 const app = express();
 app.use(express.json()); /*Express doesn't parse JSON bodies by default*/
@@ -18,31 +20,26 @@ const connectDB = async () => {
 };
 connectDB();
 
-const movieSchema = new Schema({
-  title: { type: String, required: true },
-  thumbnail: String,
-  date: String,
-  place: String,
-  comment: String,
-});
-
-const Movie = mongoose.model("Movie", movieSchema);
-
-const movieINfo = {
-  title: "Duro de matar",
-  thumbnail: "/asdfasdfasdf",
-  date: "23/3/2123",
-  place: "Home",
-  comment: "I love itttttttt",
-};
-
 app.get("/api", async (req, res) => {
   const response = await Movie.find({});
   res.status(200).send(response);
 });
 
+app.post("/api/users", async (req, res) => {
+  // console.log(req.body, "From POST users request");
+  const body = req.body;
+
+  const newUser = new User(req.body);
+  const response = await newUser.save();
+
+  res.status(201).json(response);
+});
+
+// app.get('/api/users/:id') //FIXME
+
 app.post("/api/movies", async (req, res) => {
-  console.log(req.body, "From POST request");
+  console.log(req.body, "From POST movies request");
+
   const newMovie = new Movie(req.body);
   const response = await newMovie.save();
 
@@ -69,6 +66,7 @@ app.put("/api/movies/:id", async (req, res) => {
 });
 
 app.delete("/api/movies/:id", async (req, res) => {
+  /* When do I need try/catch block and trow error?*/
   try {
     const response = await Movie.findOneAndDelete({ _id: req.params.id });
 

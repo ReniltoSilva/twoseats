@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Movie from "../components/Movie";
 
 const MyList = () => {
   const [title, setTitle] = useState("");
   const [thumbnail, setThumbnail] = useState("");
+
+  const [rating, setRating] = useState("");
   const [date, setDate] = useState("");
   const [place, setPlace] = useState("");
   const [comment, setComment] = useState("");
+
   const [toggleModal, setToggleModal] = useState(false);
   const [allMovies, setAllMovies] = useState("");
 
@@ -18,16 +22,19 @@ const MyList = () => {
     fetchMovies();
   }, []);
 
-  const saveTitle = (movieInfo) => {
+  const saveTitle = (movieComponent) => {
+    const { title, thumbnail } = movieComponent;
     setToggleModal(!toggleModal);
 
-    setTitle(movieInfo.title);
-    setThumbnail(movieInfo.thumbnail);
+    setTitle(title);
+    setThumbnail(thumbnail);
   };
 
   const saveMovieInfo = async (e) => {
     e.preventDefault();
     setToggleModal(!toggleModal);
+
+    if (!date && !place && !comment) return;
 
     const movieID = allMovies.find((movie) => movie.title === title);
 
@@ -39,6 +46,7 @@ const MyList = () => {
       comment,
     };
 
+    /*Send to backend and update in DB*/
     const response = await axios.put(
       `http://localhost:3001/api/movies/${movieID._id}`,
       movieINfo,
@@ -48,6 +56,7 @@ const MyList = () => {
     const updatedAllMovies = allMovies.map((movie) =>
       movie.title === response.data.title ? response.data : movie,
     );
+
     setAllMovies(updatedAllMovies);
 
     setTitle("");
@@ -85,7 +94,11 @@ const MyList = () => {
           >
             <label>
               Rating:
-              <input type="text" value={""} />
+              <input
+                type="text"
+                value={rating}
+                onChange={(e) => setRating(e.target.value)}
+              />
             </label>
 
             <label>
@@ -102,6 +115,7 @@ const MyList = () => {
               <input
                 type="text"
                 value={place}
+                // onChange={(e) => setPlace(e.target.value)}
                 onChange={(e) => setPlace(e.target.value)}
               />
             </label>
@@ -114,9 +128,7 @@ const MyList = () => {
                 value={comment}
                 id="commentId"
                 onChange={(e) => setComment(e.target.value)}
-              >
-                I love this movie, definitely on my top 5 best movies
-              </textarea>
+              ></textarea>
             </label>
 
             <button type="submit">Save</button>
@@ -130,45 +142,15 @@ const MyList = () => {
           <div
             className="mylist_movie_container"
             style={{ display: "flex" }}
-            class="border-1 rounded-sm "
+            class="border-1 rounded-sm"
             key={movie.title}
           >
-            <div className="mylist_thumbnail_container">
-              <img
-                src={`https://image.tmdb.org/t/p/w500${movie.thumbnail}`}
-                alt="movie_thumbnail"
-                style={{ width: "120px" }}
-              />
-            </div>
-
-            <div className="mylist_movie_details_container">
-              <h4>{movie.title}</h4>
-              <p>Date: {movie.date}</p>
-              <p>Place: {movie.place}</p>
-              <p>{movie.comment}</p>
-              <div className="mylist_bts_container">
-                <button
-                  onClick={() =>
-                    saveTitle({
-                      title: movie.title,
-                      thumbnail: movie.thumbnail,
-                      date: movie.date,
-                      place: movie.place,
-                      comment: movie.comment,
-                    })
-                  }
-                >
-                  Edit
-                </button>
-                <button
-                  style={{ backgroundColor: "rgb(255, 218, 218)" }}
-                  onClick={() => deleteMovie(movie.title)}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-            <div className="mylist_comment_container"></div>
+            <Movie
+              details={movie}
+              saveTitle={saveTitle}
+              deleteMovie={deleteMovie}
+              from={"myList.jsx"}
+            />
           </div>
         ))}
     </>

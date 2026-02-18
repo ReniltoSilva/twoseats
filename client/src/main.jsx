@@ -4,8 +4,8 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MyList from "./pages/MyList.jsx";
-import Home from "./components/Home.jsx";
-import Login from "./components/Login.jsx";
+import Home from "./pages/Home.jsx";
+import Login from "./pages/Login.jsx";
 
 createRoot(document.getElementById("root")).render(
   <Router>

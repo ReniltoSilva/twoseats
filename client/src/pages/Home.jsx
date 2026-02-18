@@ -1,5 +1,5 @@
 import axios from "axios";
-import Movie from "./Movie";
+import Movie from "../components/Movie";
 import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 
@@ -22,7 +22,7 @@ const Home = () => {
         config,
       );
       const responseDB = await axios.get("http://localhost:3001/api/");
-
+      console.log(responseTMDB.data.results);
       // const obj1 = [
       //   { id: 1, name: "Alice", role: "Engineer" },
       //   { id: 2, name: "Bob", role: "Designer" },
@@ -35,8 +35,6 @@ const Home = () => {
       //   { id: 3, name: "Robert", role: "Carpenter" },
       // ];
 
-      let newArr = [];
-
       // obj1.forEach((item, i) => {
       //   if (item.name === obj2[i].name) {
       //     newArr.push({ name: item.name, button: true });
@@ -47,16 +45,20 @@ const Home = () => {
       // console.log(responseDB.data);
       // console.log(responseDB.data[0].title);
 
-      responseTMDB.data.results.map((item) => {
+      let newArr = [];
+
+      /* Improve this, transform to setMap maybe */
+      responseTMDB.data.results.map((movieTMDB) => {
         const checkMovie = responseDB.data.some(
-          (movie) => movie.title === item.title,
+          (movie) => movie.title === movieTMDB.title,
         );
 
         const movieObj = {
-          title: item.title,
-          thumbnail: item.poster_path,
-          overview: item.overview,
-          id: item.id,
+          title: movieTMDB.title,
+          thumbnail: movieTMDB.poster_path,
+          overview: movieTMDB.overview,
+          id: movieTMDB.id,
+          genreId: movieTMDB.genre_ids,
         };
 
         if (checkMovie) {
@@ -70,20 +72,40 @@ const Home = () => {
 
       setMovies(newArr);
     };
-
     fetchLatestMovies();
-  }, [movies]);
+  }, []); //FIXME - I had a dependency 'movies' here, the useEffect fetches movies and updates 'movies' variable, that causes an infinite loop.
 
   const saveToDB = async (movieParam) => {
+    const { title, thumbnail, genreId } = movieParam;
+
     const newMovie = {
-      title: movieParam.title,
-      thumbnail: movieParam.thumbnail,
+      title,
+      thumbnail,
+      genreId,
       date: "",
       place: "",
       comment: "",
     };
 
-    await axios.post("http://localhost:3001/api/movies", newMovie);
+    const response = await axios.post(
+      "http://localhost:3001/api/movies",
+      newMovie,
+    );
+
+    /* Improve this, extract this functionality, maybe? 
+    it's being used twice almost the same func up above */
+    let newArr = [];
+
+    movies.map((item) => {
+      if (response.data.title === item.title) {
+        item.button = true;
+        newArr.push(item);
+      } else {
+        newArr.push(item);
+      }
+    });
+
+    setMovies(newArr);
   };
 
   return (
@@ -101,7 +123,7 @@ const Home = () => {
             }}
             class="shadow-lg border-1 rounded-sm border-black"
           >
-            <Movie details={item} saveToDB={saveToDB} />
+            <Movie details={item} saveToDB={saveToDB} from={"home.jsx"} />
           </div>
         ))}
       </div>
