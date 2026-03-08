@@ -138,21 +138,40 @@ const MyList = () => {
       )}
 
       {allMovies &&
-        allMovies.map((movie) => (
-          <div
-            className="mylist_movie_container"
-            style={{ display: "flex" }}
-            class="border-1 rounded-sm"
-            key={movie.title}
-          >
-            <Movie
-              details={movie}
-              saveTitle={saveTitle}
-              deleteMovie={deleteMovie}
-              from={"myList.jsx"}
-            />
-          </div>
-        ))}
+        allMovies.map(
+          (movie) => (
+            // <div
+            //   className="mylist_movie_container"
+            //   style={{ display: "flex" }}
+            //   class="border-1 rounded-sm"
+            //   key={movie.title}
+            // >
+            // <Movie
+            //   details={movie}
+            //   saveTitle={saveTitle}
+            //   deleteMovie={deleteMovie}
+            //   from={"myList.jsx"}
+            // />
+
+            <div className="card card-side bg-base-100 shadow-sm">
+              {/* <figure>
+                <img
+                  src={`https://image.tmdb.org/t/p/w200${movie.thumbnail}`}
+                  alt="Movie"
+                />
+              </figure> */}
+              <div className="card-actions justify-start">
+                <Movie
+                  details={movie}
+                  saveTitle={saveTitle}
+                  deleteMovie={deleteMovie}
+                  from={"myList.jsx"}
+                />
+              </div>
+            </div>
+          ),
+          // </div>
+        )}
     </>
   );
 };

@@ -140,15 +140,85 @@ const Movie = ({ details, saveToDB, saveTitle, deleteMovie, from }) => {
   const ChildMyLIst = () => {
     return (
       <>
-        <p>Rating: {rating}</p>
+        <div className="rating rating-sm rating-half">
+          <input type="radio" name="rating-11" className="rating-hidden" />
+          <input
+            type="radio"
+            name="rating-11"
+            className="mask mask-star-2 mask-half-1 bg-green-500"
+            aria-label="0.5 star"
+          />
+          <input
+            type="radio"
+            name="rating-11"
+            className="mask mask-star-2 mask-half-2 bg-green-500"
+            aria-label="1 star"
+          />
+          <input
+            type="radio"
+            name="rating-11"
+            className="mask mask-star-2 mask-half-1 bg-green-500"
+            aria-label="1.5 star"
+            defaultChecked
+          />
+          <input
+            type="radio"
+            name="rating-11"
+            className="mask mask-star-2 mask-half-2 bg-green-500"
+            aria-label="2 star"
+          />
+          <input
+            type="radio"
+            name="rating-11"
+            className="mask mask-star-2 mask-half-1 bg-green-500"
+            aria-label="2.5 star"
+          />
+          <input
+            type="radio"
+            name="rating-11"
+            className="mask mask-star-2 mask-half-2 bg-green-500"
+            aria-label="3 star"
+          />
+          <input
+            type="radio"
+            name="rating-11"
+            className="mask mask-star-2 mask-half-1 bg-green-500"
+            aria-label="3.5 star"
+          />
+          <input
+            type="radio"
+            name="rating-11"
+            className="mask mask-star-2 mask-half-2 bg-green-500"
+            aria-label="4 star"
+          />
+          <input
+            type="radio"
+            name="rating-11"
+            className="mask mask-star-2 mask-half-1 bg-green-500"
+            aria-label="4.5 star"
+          />
+          <input
+            type="radio"
+            name="rating-11"
+            className="mask mask-star-2 mask-half-2 bg-green-500"
+            aria-label="5 star"
+          />
+        </div>
+
         <p>Date: {date}</p>
         <p>Place: {place}</p>
         <p>{comment}</p>
 
         <div className="mylist_bts_container">
-          <button onClick={() => callSaveTitle(details)}>Edit</button>
           <button
-            style={{ backgroundColor: "rgb(255, 218, 218)" }}
+            className="btn btn-primary"
+            onClick={() => callSaveTitle(details)}
+          >
+            Edit
+          </button>
+          <button
+            className="btn btn-primary"
+            style={{ backgroundColor: "rgb(247, 126, 126)" }}
             onClick={() => callDeleteMovie(details)}
           >
             Delete
@@ -185,19 +255,29 @@ const Movie = ({ details, saveToDB, saveTitle, deleteMovie, from }) => {
 
   return (
     <>
-      <div className="mylist_thumbnail_container">
+      {/* <div className="mylist_thumbnail_container">
         <img
           src={`https://image.tmdb.org/t/p/w500${thumbnail}`}
           alt="movie_thumbnail"
           style={{ width: "13rem" }}
         />
-      </div>
+      </div> */}
 
-      <div className="mylist_movie_details_container">
+      <figure className="px-2 pt-2">
+        <img
+          src={`https://image.tmdb.org/t/p/w200${thumbnail}`}
+          alt={`${title} movie thumbnail`}
+          className="rounded-xl"
+        />
+      </figure>
+
+      {/* <div className="mylist_movie_details_container"> */}
+      <div className="card ">
         <div className="genre_container">
           {checkGenre.map((genre) => (
             <p
-              className="genre"
+              // className="genre" /*Old badge style*/
+              className="badge badge-sm"
               style={{
                 background: genre.backgroundColor,
                 color: genre.textColor,
