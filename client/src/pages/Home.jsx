@@ -5,6 +5,8 @@ import { useOutletContext } from "react-router-dom";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
+  const baseUrl = "http://localhost:3001/api/movies";
+  const tmdbUrl = "https://api.themoviedb.org/3/discover/movie";
 
   useEffect(() => {
     const fetchLatestMovies = async () => {
@@ -17,12 +19,9 @@ const Home = () => {
         },
       };
 
-      const responseTMDB = await axios.get(
-        "https://api.themoviedb.org/3/discover/movie",
-        config,
-      );
-      const responseDB = await axios.get("http://localhost:3001/api/");
-      console.log(responseTMDB.data.results);
+      const responseTMDB = await axios.get(tmdbUrl, config);
+      const responseDB = await axios.get(baseUrl);
+      // console.log(responseTMDB.data.results);
       // const obj1 = [
       //   { id: 1, name: "Alice", role: "Engineer" },
       //   { id: 2, name: "Bob", role: "Designer" },

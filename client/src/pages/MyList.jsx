@@ -16,7 +16,7 @@ const MyList = () => {
 
   useEffect(() => {
     async function fetchMovies() {
-      const response = await axios.get("http://localhost:3001/api");
+      const response = await axios.get("http://localhost:3001/api/movies");
       setAllMovies(response.data);
     }
     fetchMovies();
