@@ -84,8 +84,7 @@ const MyList = () => {
   };
 
   return (
-    <>
-      <h1>My List</h1>
+    <div className="px-30 pt-5">
       {toggleModal && (
         <div className="form_popup_container">
           <form
@@ -131,7 +130,9 @@ const MyList = () => {
               ></textarea>
             </label>
 
-            <button type="submit">Save</button>
+            <button type="submit" className="btn btn-primary">
+              Save
+            </button>
           </form>
           <button onClick={() => setToggleModal(!toggleModal)}>Cancel</button>
         </div>
@@ -152,8 +153,7 @@ const MyList = () => {
             //   deleteMovie={deleteMovie}
             //   from={"myList.jsx"}
             // />
-
-            <div className="card card-side bg-base-100 shadow-sm">
+            <div className="card card-side bg-base-200 shadow-md mt-5">
               {/* <figure>
                 <img
                   src={`https://image.tmdb.org/t/p/w200${movie.thumbnail}`}
@@ -172,7 +172,7 @@ const MyList = () => {
           ),
           // </div>
         )}
-    </>
+    </div>
   );
 };
 

@@ -145,62 +145,62 @@ const Movie = ({ details, saveToDB, saveTitle, deleteMovie, from }) => {
           <input
             type="radio"
             name="rating-11"
-            className="mask mask-star-2 mask-half-1 bg-green-500"
+            className="mask mask-star-2 mask-half-1 bg-orange-500"
             aria-label="0.5 star"
           />
           <input
             type="radio"
             name="rating-11"
-            className="mask mask-star-2 mask-half-2 bg-green-500"
+            className="mask mask-star-2 mask-half-2 bg-orange-500"
             aria-label="1 star"
           />
           <input
             type="radio"
             name="rating-11"
-            className="mask mask-star-2 mask-half-1 bg-green-500"
+            className="mask mask-star-2 mask-half-1 bg-orange-500"
             aria-label="1.5 star"
             defaultChecked
           />
           <input
             type="radio"
             name="rating-11"
-            className="mask mask-star-2 mask-half-2 bg-green-500"
+            className="mask mask-star-2 mask-half-2 bg-orange-500"
             aria-label="2 star"
           />
           <input
             type="radio"
             name="rating-11"
-            className="mask mask-star-2 mask-half-1 bg-green-500"
+            className="mask mask-star-2 mask-half-1 bg-orange-500"
             aria-label="2.5 star"
           />
           <input
             type="radio"
             name="rating-11"
-            className="mask mask-star-2 mask-half-2 bg-green-500"
+            className="mask mask-star-2 mask-half-2 bg-orange-500"
             aria-label="3 star"
           />
           <input
             type="radio"
             name="rating-11"
-            className="mask mask-star-2 mask-half-1 bg-green-500"
+            className="mask mask-star-2 mask-half-1 bg-orange-500"
             aria-label="3.5 star"
           />
           <input
             type="radio"
             name="rating-11"
-            className="mask mask-star-2 mask-half-2 bg-green-500"
+            className="mask mask-star-2 mask-half-2 bg-orange-500"
             aria-label="4 star"
           />
           <input
             type="radio"
             name="rating-11"
-            className="mask mask-star-2 mask-half-1 bg-green-500"
+            className="mask mask-star-2 mask-half-1 bg-orange-500"
             aria-label="4.5 star"
           />
           <input
             type="radio"
             name="rating-11"
-            className="mask mask-star-2 mask-half-2 bg-green-500"
+            className="mask mask-star-2 mask-half-2 bg-orange-500"
             aria-label="5 star"
           />
         </div>
@@ -231,13 +231,13 @@ const Movie = ({ details, saveToDB, saveTitle, deleteMovie, from }) => {
   const ChildHome = () => {
     return (
       <>
-        <p>{overview}</p>
+        {/* <p>{overview}</p> */}
         {details.button ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="30"
             height="30"
-            fill="green"
+            fill="orange"
             class="bi bi-bookmark-check-fill"
             viewBox="0 0 16 16"
           >
@@ -247,7 +247,12 @@ const Movie = ({ details, saveToDB, saveTitle, deleteMovie, from }) => {
             />
           </svg>
         ) : (
-          <button onClick={() => callSaveToDB(details)}>Add to list</button>
+          <button
+            className="btn btn-primary"
+            onClick={() => callSaveToDB(details)}
+          >
+            Add to list
+          </button>
         )}
       </>
     );
@@ -262,17 +267,20 @@ const Movie = ({ details, saveToDB, saveTitle, deleteMovie, from }) => {
           style={{ width: "13rem" }}
         />
       </div> */}
-
-      <figure className="px-2 pt-2">
+      <figure className="px-2 pt-2 cover_overview_background">
+        <p className="overview">{overview}</p>
         <img
           src={`https://image.tmdb.org/t/p/w200${thumbnail}`}
           alt={`${title} movie thumbnail`}
-          className="rounded-xl"
+          className="rounded-xl img_figure"
         />
       </figure>
 
       {/* <div className="mylist_movie_details_container"> */}
-      <div className="card ">
+      <div className="card">
+        <h3 style={{ margin: "0px" }}>
+          <strong>{title}</strong>
+        </h3>
         <div className="genre_container">
           {checkGenre.map((genre) => (
             <p
@@ -287,9 +295,7 @@ const Movie = ({ details, saveToDB, saveTitle, deleteMovie, from }) => {
             </p> /*Add key={uniqueID}*/ //FIXME
           ))}
         </div>
-        <h3>
-          <strong>{title}</strong>
-        </h3>
+
         {from === "home.jsx" ? <ChildHome /> : <ChildMyLIst />}
       </div>
     </>

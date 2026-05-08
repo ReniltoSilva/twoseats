@@ -109,18 +109,11 @@ const Home = () => {
 
   return (
     <>
-      <h1>Home</h1>
       <div className="main_movies_container">
         {movies.map((item) => (
           <div
             key={item.id}
-            style={{
-              listStyle: "none",
-              margin: "5px 0px",
-              padding: "5px",
-              width: "17rem",
-            }}
-            class="shadow-lg border-1 rounded-sm border-black"
+            class="card shadow-lg border-1 rounded-sm border-black "
           >
             <Movie details={item} saveToDB={saveToDB} from={"home.jsx"} />
           </div>
