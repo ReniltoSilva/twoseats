@@ -75,7 +75,9 @@ const Home = () => {
   }, []); //FIXME - I had a dependency 'movies' here, the useEffect fetches movies and updates 'movies' variable, that causes an infinite loop.
 
   const saveToDB = async (movieParam) => {
-    const { title, thumbnail, genreId } = movieParam;
+    const { title, thumbnail, genreId, overview } = movieParam;
+
+    console.log(movieParam); //CONTINUE
 
     const newMovie = {
       title,
@@ -84,6 +86,7 @@ const Home = () => {
       date: "",
       place: "",
       comment: "",
+      overview,
     };
 
     const response = await axios.post(

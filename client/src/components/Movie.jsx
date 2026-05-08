@@ -121,10 +121,12 @@ const Movie = ({ details, saveToDB, saveTitle, deleteMovie, from }) => {
   });
 
   const callSaveToDB = (movie) => {
+    console.log(movie);
     saveToDB({
       title: movie.title,
       thumbnail: movie.thumbnail,
       genreId: movie.genreId,
+      overview,
     });
   };
   const callSaveTitle = (movie) => {
