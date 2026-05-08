@@ -8,6 +8,7 @@ const movieSchema = new Schema({
   date: String,
   place: String,
   comment: String,
+  overview: String,
 });
 
 const Movie = mongoose.model("Movie", movieSchema);
