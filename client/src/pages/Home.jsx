@@ -77,8 +77,6 @@ const Home = () => {
   const saveToDB = async (movieParam) => {
     const { title, thumbnail, genreId, overview } = movieParam;
 
-    console.log(movieParam); //CONTINUE
-
     const newMovie = {
       title,
       thumbnail,

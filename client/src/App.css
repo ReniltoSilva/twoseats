@@ -47,7 +47,7 @@ root {
 
 .overview {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.85);
   opacity: 0;
   color: whitesmoke;
   top: 0;
@@ -140,21 +140,20 @@ p {
   margin: 5px 0;
 }
 
-.form_popup_container {
-  display: block;
-  position: fixed;
+/* .form_popup_container {
+  position: absolute;
   width: 500px;
   height: 250px;
-  /* z-index: 100; */
+  z-index: 100;
   border-radius: 5px;
   backdrop-filter: blur(20px) brightness(110%);
   background-color: rgb(235, 168, 168);
-}
+} */
 
-.form_popup_container::backdrop {
-  background-color: rgba(0, 0, 0, 0.726); /* A semi-transparent black overlay */
-  backdrop-filter: blur(5px); /* Optional blur effect */
-}
+/* .form_popup_container::backdrop {
+  background-color: rgba(0, 0, 0, 0.726); 
+  backdrop-filter: blur(5px); 
+} */
 
 #commentId {
   width: 90%;

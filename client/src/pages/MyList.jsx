@@ -86,92 +86,32 @@ const MyList = () => {
   return (
     <div className="px-30 pt-5">
       {toggleModal && (
-        <div className="form_popup_container">
-          <form
-            style={{ display: "flex", flexDirection: "column" }}
-            onSubmit={saveMovieInfo}
-          >
-            <label>
-              Rating:
-              <input
-                type="text"
-                value={rating}
-                onChange={(e) => setRating(e.target.value)}
-              />
-            </label>
-
-            <label>
-              Date:
-              <input
-                type="text"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-              />
-            </label>
-
-            <label>
-              Place:
-              <input
-                type="text"
-                value={place}
-                // onChange={(e) => setPlace(e.target.value)}
-                onChange={(e) => setPlace(e.target.value)}
-              />
-            </label>
-
-            <label className="comment_container">
-              Comment:
-              <textarea
-                rows={7}
-                cols={2}
-                value={comment}
-                id="commentId"
-                onChange={(e) => setComment(e.target.value)}
-              ></textarea>
-            </label>
-
-            <button type="submit" className="btn btn-primary">
-              Save
-            </button>
-          </form>
-          <button onClick={() => setToggleModal(!toggleModal)}>Cancel</button>
-        </div>
+        <dialog id="my_modal_3" className="modal">
+          <div className="modal-box">
+            <form method="dialog">
+              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                ✕
+              </button>
+            </form>
+            <h3 className="font-bold text-lg">Hello!</h3>
+            <p className="py-4">Press ESC key or click on ✕ button to close</p>
+          </div>
+        </dialog>
       )}
 
       {allMovies &&
-        allMovies.map(
-          (movie) => (
-            // <div
-            //   className="mylist_movie_container"
-            //   style={{ display: "flex" }}
-            //   class="border-1 rounded-sm"
-            //   key={movie.title}
-            // >
-            // <Movie
-            //   details={movie}
-            //   saveTitle={saveTitle}
-            //   deleteMovie={deleteMovie}
-            //   from={"myList.jsx"}
-            // />
-            <div className="card card-side bg-base-200 shadow-md mt-5">
-              {/* <figure>
-                <img
-                  src={`https://image.tmdb.org/t/p/w200${movie.thumbnail}`}
-                  alt="Movie"
-                />
-              </figure> */}
-              <div className="card-actions justify-start">
-                <Movie
-                  details={movie}
-                  saveTitle={saveTitle}
-                  deleteMovie={deleteMovie}
-                  from={"myList.jsx"}
-                />
-              </div>
+        allMovies.map((movie) => (
+          <div className="card card-side bg-base-200 shadow-md mt-5">
+            <div className="card-actions justify-start">
+              <Movie
+                details={movie}
+                saveTitle={saveTitle}
+                deleteMovie={deleteMovie}
+                from={"myList.jsx"}
+              />
             </div>
-          ),
-          // </div>
-        )}
+          </div>
+        ))}
     </div>
   );
 };

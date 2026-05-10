@@ -1,6 +1,11 @@
+import { useState } from "react";
+import Popup from "./Popup";
+
 const Movie = ({ details, saveToDB, saveTitle, deleteMovie, from }) => {
   const { rating, title, thumbnail, overview, genreId, date, place, comment } =
     details;
+
+  const [showModal, setShowModal] = useState(false);
 
   const genreList = [
     {
@@ -121,7 +126,6 @@ const Movie = ({ details, saveToDB, saveTitle, deleteMovie, from }) => {
   });
 
   const callSaveToDB = (movie) => {
-    console.log(movie);
     saveToDB({
       title: movie.title,
       thumbnail: movie.thumbnail,
@@ -142,6 +146,19 @@ const Movie = ({ details, saveToDB, saveTitle, deleteMovie, from }) => {
   const ChildMyLIst = () => {
     return (
       <>
+        {/* Modal */}
+        {/* <dialog id="my_modal_3" className="modal">
+          <div className="modal-box">
+            <form method="dialog">
+              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                ✕
+              </button>
+            </form>
+            <h3 className="font-bold text-lg">Hello!</h3>
+            <p className="py-4">Press ESC key or click on ✕ button to close</p>
+          </div>
+        </dialog> */}
+
         <div className="rating rating-sm rating-half">
           <input type="radio" name="rating-11" className="rating-hidden" />
           <input
@@ -212,12 +229,14 @@ const Movie = ({ details, saveToDB, saveTitle, deleteMovie, from }) => {
         <p>{comment}</p>
 
         <div className="mylist_bts_container">
-          <button
+          {/* <button
             className="btn btn-primary"
-            onClick={() => callSaveTitle(details)}
+            // onClick={() => callSaveTitle(details)}
+            onClick={() => document.getElementById("my_modal_3").displayModal()}
           >
             Edit
-          </button>
+          </button> */}
+          <Popup />
           <button
             className="btn btn-primary"
             style={{ backgroundColor: "rgb(247, 126, 126)" }}
@@ -262,13 +281,6 @@ const Movie = ({ details, saveToDB, saveTitle, deleteMovie, from }) => {
 
   return (
     <>
-      {/* <div className="mylist_thumbnail_container">
-        <img
-          src={`https://image.tmdb.org/t/p/w500${thumbnail}`}
-          alt="movie_thumbnail"
-          style={{ width: "13rem" }}
-        />
-      </div> */}
       <figure className="px-2 pt-2 cover_overview_background">
         <p className="overview">{overview}</p>
         <img
