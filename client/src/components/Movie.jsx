@@ -146,19 +146,6 @@ const Movie = ({ details, saveToDB, saveTitle, deleteMovie, from }) => {
   const ChildMyLIst = () => {
     return (
       <>
-        {/* Modal */}
-        {/* <dialog id="my_modal_3" className="modal">
-          <div className="modal-box">
-            <form method="dialog">
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                ✕
-              </button>
-            </form>
-            <h3 className="font-bold text-lg">Hello!</h3>
-            <p className="py-4">Press ESC key or click on ✕ button to close</p>
-          </div>
-        </dialog> */}
-
         <div className="rating rating-sm rating-half">
           <input type="radio" name="rating-11" className="rating-hidden" />
           <input
@@ -229,14 +216,9 @@ const Movie = ({ details, saveToDB, saveTitle, deleteMovie, from }) => {
         <p>{comment}</p>
 
         <div className="mylist_bts_container">
-          {/* <button
-            className="btn btn-primary"
-            // onClick={() => callSaveTitle(details)}
-            onClick={() => document.getElementById("my_modal_3").displayModal()}
-          >
-            Edit
-          </button> */}
+          {/*Popup is EDIT button and modal*/}
           <Popup />
+
           <button
             className="btn btn-primary"
             style={{ backgroundColor: "rgb(247, 126, 126)" }}
@@ -290,7 +272,6 @@ const Movie = ({ details, saveToDB, saveTitle, deleteMovie, from }) => {
         />
       </figure>
 
-      {/* <div className="mylist_movie_details_container"> */}
       <div className="card">
         <h3 style={{ margin: "0px" }}>
           <strong>{title}</strong>

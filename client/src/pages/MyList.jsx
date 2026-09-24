@@ -11,7 +11,6 @@ const MyList = () => {
   const [place, setPlace] = useState("");
   const [comment, setComment] = useState("");
 
-  const [toggleModal, setToggleModal] = useState(false);
   const [allMovies, setAllMovies] = useState("");
 
   useEffect(() => {
@@ -32,13 +31,12 @@ const MyList = () => {
 
   const saveMovieInfo = async (e) => {
     e.preventDefault();
-    setToggleModal(!toggleModal);
 
     if (!date && !place && !comment) return;
 
     const movieID = allMovies.find((movie) => movie.title === title);
 
-    const movieINfo = {
+    const movieInfo = {
       title,
       thumbnail,
       date,
@@ -49,7 +47,7 @@ const MyList = () => {
     /*Send to backend and update in DB*/
     const response = await axios.put(
       `http://localhost:3001/api/movies/${movieID._id}`,
-      movieINfo,
+      movieInfo,
     );
 
     /* Update 'allMOvies' variable to reflet update on the page */
@@ -63,7 +61,6 @@ const MyList = () => {
     setDate("");
     setPlace("");
     setComment("");
-    setToggleModal("");
   };
 
   const deleteMovie = async (movieTitle) => {
@@ -85,20 +82,6 @@ const MyList = () => {
 
   return (
     <div className="px-30 pt-5">
-      {toggleModal && (
-        <dialog id="my_modal_3" className="modal">
-          <div className="modal-box">
-            <form method="dialog">
-              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                ✕
-              </button>
-            </form>
-            <h3 className="font-bold text-lg">Hello!</h3>
-            <p className="py-4">Press ESC key or click on ✕ button to close</p>
-          </div>
-        </dialog>
-      )}
-
       {allMovies &&
         allMovies.map((movie) => (
           <div className="card card-side bg-base-200 shadow-md mt-5">
