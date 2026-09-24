@@ -113,10 +113,15 @@ const Home = () => {
       <div className="main_movies_container">
         {movies.map((item) => (
           <div
-            key={item.id}
-            class="card shadow-lg border-1 rounded-sm border-black "
+            // key={item.id}// CONTINUE is it supposed to have an ID key here?
+            className="card shadow-lg border-1 rounded-sm border-black "
           >
-            <Movie details={item} saveToDB={saveToDB} from={"home.jsx"} />
+            <Movie
+              key={item.id.toString()}
+              details={item}
+              saveToDB={saveToDB}
+              from={"home.jsx"}
+            />
           </div>
         ))}
       </div>
